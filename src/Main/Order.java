@@ -1,5 +1,6 @@
 package Main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
@@ -35,8 +36,22 @@ public class Order {
         return grandTotal;
     }
 
-    public void processOrder(){
-        
+    public static void processOrder(Customer customer){
+        int orderCount = 0;
+
+        ArrayList<Product> items = customer.getCart();
+        String id = String.format("O%03d", orderCount++);
+        String date = LocalDate.now().toString();
+
+        Order order = new Order(id, date, items, "Ordered");
+
+        for (Product product : items) {
+            product.reduceQuantity();
+        }
+
+        customer.placeOrder(order);
+        customer.clearCart();
+        Utility.printAlert("Order has been placed");
     }
 
     public String getOrderId() {

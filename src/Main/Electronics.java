@@ -2,12 +2,12 @@ package Main;
 
 public class Electronics extends Product implements Orderable {
     private String brand;
-    private int warrantyPeriod;
+    private int quantityInStock;
     
-    public Electronics(String productId, String productName, Double price, String brand, int warrantyPeriod) {
+    public Electronics(String productId, String productName, Double price, String brand, int quantityInStock) {
         super(productId, productName, price);
         this.brand = brand;
-        this.warrantyPeriod = warrantyPeriod;
+        this.quantityInStock = quantityInStock;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Electronics extends Product implements Orderable {
 
     @Override
     public boolean isAvailable() {
-        if(warrantyPeriod >= 1) return true;
+        if(quantityInStock >= 1) return true;
         else return false;
     }
 
@@ -32,6 +32,11 @@ public class Electronics extends Product implements Orderable {
     @Override
     public void displayOrderDetails() {}
 
+    @Override
+    public void reduceQuantity() {
+        quantityInStock--;
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -40,11 +45,11 @@ public class Electronics extends Product implements Orderable {
         this.brand = brand;
     }
 
-    public int getWarrantyPeriod() {
-        return warrantyPeriod;
+    public int getquantityInStock() {
+        return quantityInStock;
     }
 
-    public void setWarrantyPeriod(int warrantyPeriod) {
-        this.warrantyPeriod = warrantyPeriod;
+    public void setquantityInStock(int quantityInStock) {
+        this.quantityInStock = quantityInStock;
     }
 }

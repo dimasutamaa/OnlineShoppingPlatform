@@ -15,6 +15,8 @@ public abstract class Product {
 
     public abstract boolean isAvailable();
 
+    public abstract void reduceQuantity();
+
     public String getProductId() {
         return productId;
     }

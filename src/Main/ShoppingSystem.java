@@ -33,6 +33,7 @@ public class ShoppingSystem {
                     break;
 
                 case "2":
+                    Utility.clearScreen();
                     displayCartMenu();
                     break;
 
@@ -70,7 +71,6 @@ public class ShoppingSystem {
                 case "1":
                     viewAllProducts();
                     Utility.clearScreen();
-                    displayProductsMenu();
                     break;
 
                 case "2":
@@ -83,7 +83,7 @@ public class ShoppingSystem {
 
                 case "4":
                     Utility.clearScreen();
-                    displayMainMenu();
+                    return;
             
                 default:
                     Utility.printAlert("Invalid Choice");
@@ -93,7 +93,33 @@ public class ShoppingSystem {
     }
 
     public void displayCartMenu(){
+        while(true){
+            Utility.printHeader("View Shopping Cart");
+            System.out.println("1. View Cart Contents");
+            System.out.println("2. Checkout");
+            System.out.println("3. Back to Main Menu");
+            System.out.print("Your Choice: ");
+            String choice = in.nextLine();
 
+            switch (choice) {
+                case "1":
+                    viewCartContents();
+                    Utility.clearScreen();
+                    break;
+            
+                case "2":
+                    checkOut();
+                    break;
+            
+                case "3":
+                    Utility.clearScreen();
+                    return;
+            
+                default:
+                    Utility.printAlert("Invalid Choice");
+                    break;
+            }
+        }
     }
 
     public void displayOrdersMenu(){
@@ -162,7 +188,7 @@ public class ShoppingSystem {
 
         if(input.equalsIgnoreCase("back")){
             Utility.clearScreen();
-            displayProductsMenu();
+            return;
         }else{
             Product product = findProduct(input);
 
@@ -196,13 +222,13 @@ public class ShoppingSystem {
         
         System.out.print("Enter the ID to add to your cart (or type 'back' to go back): ");
         String input = in.nextLine();
-
+        
         if(input.equalsIgnoreCase("back")){
             Utility.clearScreen();
-            displayProductsMenu();
+            return;
         }else{
             Product product = findProduct(input);
-
+            
             if(product != null){
                 if(product instanceof Electronics){
                     Customer customer = (Customer) loggedUser;
@@ -217,6 +243,40 @@ public class ShoppingSystem {
         }
     }
     /* Products Menu Cases End */
+    
+    /* Cart Menu Cases Start */
+    public void viewCartContents(){
+        Customer customer = (Customer) loggedUser;
+
+        Utility.printHeader("View Cart Contents");   
+        customer.viewCart();
+        System.out.println("Press Enter to go back to View Shopping Cart Menu..."); in.nextLine();
+    }
+
+    public void checkOut(){
+        Customer customer = (Customer) loggedUser;
+
+        Utility.printHeader("Checkout");
+        System.out.println("Review your order:");
+        if(!(customer.getCart().isEmpty())){
+            customer.viewCart();
+
+            String confirm;
+            do {
+                System.out.print("Do you want to proceed with the checkout? (Y/N): ");
+                confirm = in.nextLine();
+            } while (confirm.isBlank());
+    
+            if(confirm.equalsIgnoreCase("Y")){
+                Order.processOrder(customer);    
+            }
+        }else{
+            customer.viewCart();
+            System.out.println("Press Enter to go back to View Shopping Cart Menu..."); in.nextLine();
+            Utility.clearScreen();
+        }
+    }
+    /* Cart Menu Cases End */
 
     public Product findProduct(String id){
         for (Product product : products) {

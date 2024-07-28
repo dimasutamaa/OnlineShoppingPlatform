@@ -27,7 +27,27 @@ public class Customer extends User {
     }
 
     public void viewCart(){
-        //
+        double totalPrice = 0.0;
+
+        System.out.printf("%-5s | %-30s | %-13s\n", "ID", "Product Name", "Price");
+        System.out.println("-------------------------------------------------");
+
+        if(!(getCart().isEmpty())){
+            for (Product product : getCart()) {
+                System.out.printf("%-5s | %-30s | $%-13s\n", product.getProductId(), product.getProductName(), product.getPrice());
+                totalPrice += product.getPrice();     
+            }
+        }else{
+            System.out.printf("%30s\n", "Cart is empty");
+        }
+
+        System.out.println("-------------------------------------------------\n");
+
+        System.out.println("Total Price: $" + totalPrice);
+    }
+
+    public void clearCart(){
+        getCart().clear();
     }
 
     public String getAddress() {

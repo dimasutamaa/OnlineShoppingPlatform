@@ -17,7 +17,7 @@ public class Clothing extends Product implements Orderable {
 
     @Override
     public boolean isAvailable() {
-        if(quantityInStock > 1) return true;
+        if(quantityInStock >= 1) return true;
         else return false;
     }
 
@@ -31,6 +31,11 @@ public class Clothing extends Product implements Orderable {
 
     @Override
     public void displayOrderDetails() {}
+
+    @Override
+    public void reduceQuantity() {
+        quantityInStock--;
+    }
 
     public String getSize() {
         return size;
