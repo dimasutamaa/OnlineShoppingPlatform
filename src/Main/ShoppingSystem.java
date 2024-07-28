@@ -183,25 +183,33 @@ public class ShoppingSystem {
         }
         System.out.println("--------------------------------------------------------------------------------------\n");
         
-        System.out.print("Enter the ID to add to your cart (or type 'back' to go back): ");
-        String input = in.nextLine();
+        boolean isValid = false;
 
-        if(input.equalsIgnoreCase("back")){
-            Utility.clearScreen();
-            return;
-        }else{
-            Product product = findProduct(input);
-
-            if(product != null){
-                if(product instanceof Clothing){
-                    Customer customer = (Customer) loggedUser;
-                    customer.addToCart(product);
-                    Utility.printAlert("Successfully add the product to your cart");
-                }else{
-                    Utility.printAlert("Desired product is not in this category");
-                }
+        while(!(isValid)){
+            System.out.print("Enter the ID to add to your cart (or type 'back' to go back): ");
+            String input = in.nextLine();
+    
+            if(input.equalsIgnoreCase("back")){
+                Utility.clearScreen();
+                isValid = true;
             }else{
-                Utility.printAlert("Product is not available");
+                Product product = findProduct(input);
+    
+                if(product != null){
+                    if(product instanceof Clothing){
+                        Customer customer = (Customer) loggedUser;
+                        customer.addToCart(product);
+                        Utility.printAlert("Successfully add the product to your cart");
+                        return;
+                    }else{
+                        Utility.printAlert("Desired product is not in this category");
+                        isValid = true;
+                    }
+                }else{
+                    Utility.printAlert("Product is not available");
+                    isValid = true;
+                }
+                isValid = false;             
             }
         }
     }
@@ -220,25 +228,33 @@ public class ShoppingSystem {
         }
         System.out.println("--------------------------------------------------------------------------------------\n");
         
-        System.out.print("Enter the ID to add to your cart (or type 'back' to go back): ");
-        String input = in.nextLine();
-        
-        if(input.equalsIgnoreCase("back")){
-            Utility.clearScreen();
-            return;
-        }else{
-            Product product = findProduct(input);
+        boolean isValid = false;
+
+        while(!(isValid)){
+            System.out.print("Enter the ID to add to your cart (or type 'back' to go back): ");
+            String input = in.nextLine();
             
-            if(product != null){
-                if(product instanceof Electronics){
-                    Customer customer = (Customer) loggedUser;
-                    customer.addToCart(product);
-                    Utility.printAlert("Successfully add the product to your cart");
-                }else{
-                    Utility.printAlert("Desired product is not in this category");
-                }
+            if(input.equalsIgnoreCase("back")){
+                Utility.clearScreen();
+                return;
             }else{
-                Utility.printAlert("Product is not available");
+                Product product = findProduct(input);
+                
+                if(product != null){
+                    if(product instanceof Electronics){
+                        Customer customer = (Customer) loggedUser;
+                        customer.addToCart(product);
+                        Utility.printAlert("Successfully add the product to your cart");
+                        return;
+                    }else{
+                        Utility.printAlert("Desired product is not in this category");
+                        isValid = true;
+                    }
+                }else{
+                    Utility.printAlert("Product is not available");
+                    isValid = true;
+                }
+                isValid = false;   
             }
         }
     }
@@ -255,20 +271,25 @@ public class ShoppingSystem {
 
     public void checkOut(){
         Customer customer = (Customer) loggedUser;
+        boolean isValid = false;
 
         Utility.printHeader("Checkout");
         System.out.println("Review your order:");
         if(!(customer.getCart().isEmpty())){
             customer.viewCart();
 
-            String confirm;
-            do {
+            while(!(isValid)){
                 System.out.print("Do you want to proceed with the checkout? (Y/N): ");
-                confirm = in.nextLine();
-            } while (confirm.isBlank());
-    
-            if(confirm.equalsIgnoreCase("Y")){
-                Order.processOrder(customer);    
+                String confirm = in.nextLine();
+
+                if(confirm.equalsIgnoreCase("Y")){
+                    Order.processOrder(customer);
+                    isValid = true;
+                }else if(confirm.equalsIgnoreCase("N")){
+                    isValid = true;
+                }else{
+                    isValid = false;
+                }
             }
         }else{
             customer.viewCart();
