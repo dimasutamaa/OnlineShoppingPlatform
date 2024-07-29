@@ -28,7 +28,7 @@ public class Customer extends User {
     }
 
     public void viewCart(){
-        double totalPrice = 0.0;
+        double totalPrice = 0;
 
         System.out.printf("%-5s | %-30s | %-13s\n", "ID", "Product Name", "Price");
         System.out.println("-------------------------------------------------");
@@ -44,11 +44,30 @@ public class Customer extends User {
 
         System.out.println("-------------------------------------------------\n");
 
-        System.out.println("Total Price: $" + totalPrice);
+        System.out.printf("Total Price: $%.2f\n", totalPrice);
+    }
+
+    public void viewOrders(){
+        System.out.printf("%-7s | %-20s | %-20s\n", "Order ID", "Order Date", "Total Price");
+        System.out.println("------------------------------------------------");
+        
+        for (Order order : orders) {
+            System.out.printf("%-8s | %-20s | $%-20.2f\n", order.getOrderId(), order.getOrderDate(), order.calculateTotalPrice());
+        }
+        System.out.println("------------------------------------------------");
+    }
+
+    public Order findOrder(String id){
+        for (Order order : orders) {
+            if(order.getOrderId().equals(id)){
+                return order;
+            }
+        }
+        return null;
     }
 
     public void clearCart(){
-        getCart().clear();
+        cart.clear();
     }
 
     public String getAddress() {
@@ -67,8 +86,9 @@ public class Customer extends User {
         this.orders = orders;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Product> getCart() {
-        return cart;
+        return (ArrayList<Product>) cart.clone();
     }
 
     public void setCart(ArrayList<Product> cart) {

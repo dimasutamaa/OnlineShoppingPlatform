@@ -332,11 +332,55 @@ public class ShoppingSystem {
 
     /* Orders Menu Cases Start */
     public void viewOrderHistory(){
+        boolean isValid = false;
+        Customer customer = (Customer) loggedUser;
 
+        Utility.printHeader("View Order History");
+        customer.viewOrders();
+
+        while(!(isValid)){
+            System.out.print("Enter the Order ID to view details (or type 'back' to go back): ");
+            String input = in.nextLine();
+    
+            Order order = customer.findOrder(input);
+    
+            if(order != null){
+                order.displayOrderInfo();
+                System.out.print("Press Enter to go back to View Order History..."); in.nextLine();
+                isValid = true;
+            }else if(input.equalsIgnoreCase("back")){
+                Utility.clearScreen();
+                return;
+            }else{
+                isValid = false;
+            }
+        }
     }
 
     public void trackOrder(){
+        boolean isValid = false;
+        Customer customer = (Customer) loggedUser;
 
+        Utility.printHeader("Track Order");
+
+        while(!(isValid)){
+            System.out.print("Enter the Order ID to track (or type 'back' to go back): ");
+            String input = in.nextLine();
+    
+            Order order = customer.findOrder(input);
+    
+            if(order != null){
+                Utility.printHeader("Order Tracking");
+                System.out.println("Order ID: " + order.getOrderId());
+                System.out.println("Order Status: " + order.getStatus());
+    
+                System.out.println("\nPress Enter to go back to Track Order Menu..."); in.nextLine();
+                Utility.clearScreen();
+                return;
+            }else{
+                isValid = false;
+            }
+        }
     }
     /* Orders Menu Cases End */
 

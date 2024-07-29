@@ -8,6 +8,7 @@ public class Order {
     private String orderDate;
     private ArrayList<Product> orderItems = new ArrayList<>();
     private String status;
+    private static int orderCount;
     
     public Order(String orderId, String orderDate, ArrayList<Product> orderItems, String status) {
         this.orderId = orderId;
@@ -17,30 +18,35 @@ public class Order {
     }
 
     public void displayOrderInfo(){
-        System.out.println("ID");
-        System.out.println("Date");
-        System.out.println("Items:");
-
+        Utility.printHeader("Order Details");
+        System.out.println("Order ID: " + getOrderId());
+        System.out.println("Order Date: " + getOrderDate());
+        System.out.printf("Total Price: $%.2f\n", calculateTotalPrice());
+        
+        System.out.println("\nOrder Items:");
+        System.out.printf("%-5s | %-30s | %-13s\n", "ID", "Product Name", "Price");
+        System.out.println("-------------------------------------------------");        
         for (Product product : orderItems) {
-            System.out.println("- " + product.getProductName());
+            System.out.printf("%-5s | %-30s | $%-13s\n", product.getProductId(), product.getProductName(), product.getPrice());  
         }
+        System.out.println("-------------------------------------------------\n");
     }
 
     public Double calculateTotalPrice(){
-        double grandTotal = 0;
+        Double grandTotal = 0.0;
 
         for (Product product : orderItems) {
-            grandTotal =+ product.getPrice();
+            grandTotal += product.getPrice();
         }
 
         return grandTotal;
     }
 
     public static void processOrder(Customer customer){
-        int orderCount = 0;
+        orderCount++;
 
         ArrayList<Product> items = customer.getCart();
-        String id = String.format("O%03d", orderCount++);
+        String id = String.format("O%03d", orderCount);
         String date = LocalDate.now().toString();
 
         Order order = new Order(id, date, items, "Ordered");
@@ -84,5 +90,13 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public static int getOrderCount() {
+        return orderCount;
+    }
+
+    public static void setOrderCount(int orderCount) {
+        Order.orderCount = orderCount;
     }
 }
