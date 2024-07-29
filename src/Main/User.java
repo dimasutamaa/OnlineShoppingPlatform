@@ -12,7 +12,7 @@ public class User {
     }
 
     public void displayUserInfo(){
-        System.out.println("ID          : " + getUserId());
+        System.out.println("Customer ID : " + getUserId());
         System.out.println("Username    : " + getUserName());
         System.out.println("Email       : " + getEmail());
     }

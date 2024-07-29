@@ -19,7 +19,8 @@ public class Customer extends User {
     }
 
     public void displayCustomerInfo(){
-        System.out.println("Username: " + getUserName());
+        displayUserInfo();
+        System.out.println("Addres      : " + getAddress());
     }
 
     public void addToCart(Product product){

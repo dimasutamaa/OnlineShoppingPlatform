@@ -38,6 +38,7 @@ public class ShoppingSystem {
                     break;
 
                 case "3":
+                    Utility.clearScreen();
                     displayOrdersMenu();
                     break;
 
@@ -123,12 +124,42 @@ public class ShoppingSystem {
     }
 
     public void displayOrdersMenu(){
+        while(true){
+            Utility.printHeader("View Orders");
+            System.out.println("1. View Order History");
+            System.out.println("2. Track Order");
+            System.out.println("3. Back to Main Menu");
+            System.out.print("Your Choice: ");
+            String choice = in.nextLine();
 
+            switch (choice) {
+                case "1":
+                    viewOrderHistory();
+                    break;
+            
+                case "2":
+                    trackOrder();
+                    break;
+            
+                case "3":
+                    Utility.clearScreen();
+                    return;
+            
+                default:
+                    Utility.printAlert("Invalid Choice");
+                    break;
+            }
+        }
     }
 
     public void displayCustomerInfo(){
         Customer customer = (Customer) loggedUser;
-        //
+        
+        Utility.printHeader("Customer Info");
+        customer.displayCustomerInfo();
+        System.out.println("Press Enter to back to Main Menu..."); in.nextLine();
+
+        Utility.clearScreen();
     }
 
     public void exit(){
@@ -298,6 +329,16 @@ public class ShoppingSystem {
         }
     }
     /* Cart Menu Cases End */
+
+    /* Orders Menu Cases Start */
+    public void viewOrderHistory(){
+
+    }
+
+    public void trackOrder(){
+
+    }
+    /* Orders Menu Cases End */
 
     public Product findProduct(String id){
         for (Product product : products) {
