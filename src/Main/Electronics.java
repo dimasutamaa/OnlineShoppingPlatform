@@ -1,6 +1,6 @@
 package Main;
 
-public class Electronics extends Product implements Orderable {
+public class Electronics extends Product {
     private String brand;
     private int quantityInStock;
     
@@ -26,12 +26,6 @@ public class Electronics extends Product implements Orderable {
         if(quantityInStock >= 1) return true;
         else return false;
     }
-
-    // @Override
-    // public void addToOrder(Order order) {}
-
-    // @Override
-    // public void displayOrderDetails() {}
 
     @Override
     public void reduceQuantity() {

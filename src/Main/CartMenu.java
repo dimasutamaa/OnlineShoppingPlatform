@@ -43,10 +43,8 @@ public class CartMenu {
     }
 
     public void viewCartContents(){
-        Customer customer = (Customer) loggedUser;
-
         Utility.printHeader("View Cart Contents");   
-        customer.viewCart();
+        ((Customer) loggedUser).viewCart();
         System.out.println("Press Enter to go back to View Shopping Cart Menu..."); in.nextLine();
         Utility.clearScreen();
     }

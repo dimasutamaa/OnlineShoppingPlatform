@@ -72,8 +72,7 @@ public class ProductsMenu {
         
         for (Product product : products) {
             if(product instanceof Clothing){
-                Clothing item = (Clothing) product;
-                item.displayProductInfo();
+                ((Clothing) product).displayProductInfo();
             }
         }
         System.out.println("--------------------------------------------------------------------------------------\n");
@@ -117,8 +116,7 @@ public class ProductsMenu {
         
         for (Product product : products) {
             if(product instanceof Electronics){
-                Electronics item = (Electronics) product;
-                item.displayProductInfo();
+                ((Electronics) product).displayProductInfo();
             }
         }
         System.out.println("--------------------------------------------------------------------------------------\n");

@@ -60,10 +60,8 @@ public class ShoppingSystem {
     }
 
     public void displayCustomerInfo(){
-        Customer customer = (Customer) loggedUser;
-        
         Utility.printHeader("Customer Info");
-        customer.displayCustomerInfo();
+        ((Customer) loggedUser).displayCustomerInfo();
         System.out.println("Press Enter to back to Main Menu..."); in.nextLine();
 
         Utility.clearScreen();

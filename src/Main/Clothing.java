@@ -1,6 +1,6 @@
 package Main;
 
-public class Clothing extends Product implements Orderable {
+public class Clothing extends Product {
     private String size;
     private int quantityInStock;
     
@@ -26,12 +26,6 @@ public class Clothing extends Product implements Orderable {
     public Double getPrice() {
         return super.getPrice();
     }
-
-    // @Override
-    // public void addToOrder(Order order) {}
-
-    // @Override
-    // public void displayOrderDetails() {}
 
     @Override
     public void reduceQuantity() {

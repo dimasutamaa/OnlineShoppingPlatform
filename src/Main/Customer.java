@@ -14,7 +14,6 @@ public class Customer extends User {
     
     @Override
     public void placeOrder(Order order) {
-        super.placeOrder(order);
         orders.add(order);
     }
 
