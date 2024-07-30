@@ -9,6 +9,8 @@ public class Order {
     private ArrayList<Product> orderItems = new ArrayList<>();
     private String status;
     private static int orderCount;
+
+    public Order() {}
     
     public Order(String orderId, String orderDate, ArrayList<Product> orderItems, String status) {
         this.orderId = orderId;
@@ -42,7 +44,7 @@ public class Order {
         return grandTotal;
     }
 
-    public static void processOrder(Customer customer){
+    public void processOrder(Customer customer){
         orderCount++;
 
         ArrayList<Product> items = customer.getCart();

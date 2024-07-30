@@ -12,7 +12,8 @@ public class Electronics extends Product implements Orderable {
 
     @Override
     public void displayProductInfo() {
-        System.out.println("Brand: " + getBrand());
+        String isAvalable = (isAvailable() == true) ? "In Stock" : "Out of Stock";
+        System.out.printf("%-5s | %-30s | $%-12s | %-13s | %-15s\n", getProductId(), getProductName(), getPrice(), getBrand(), isAvalable);
     }
 
     @Override
@@ -26,11 +27,11 @@ public class Electronics extends Product implements Orderable {
         else return false;
     }
 
-    @Override
-    public void addToOrder(Order order) {}
+    // @Override
+    // public void addToOrder(Order order) {}
 
-    @Override
-    public void displayOrderDetails() {}
+    // @Override
+    // public void displayOrderDetails() {}
 
     @Override
     public void reduceQuantity() {

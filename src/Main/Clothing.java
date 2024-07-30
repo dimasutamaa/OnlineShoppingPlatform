@@ -12,7 +12,8 @@ public class Clothing extends Product implements Orderable {
     
     @Override
     public void displayProductInfo() {
-        System.out.println("Size: " + getSize());
+        String isAvalable = (isAvailable() == true) ? "In Stock" : "Out of Stock";
+        System.out.printf("%-5s | %-30s | $%-12s | %-13s | %-15s\n", getProductId(), getProductName(), getPrice(), getSize(), isAvalable);
     }
 
     @Override
@@ -26,11 +27,11 @@ public class Clothing extends Product implements Orderable {
         return super.getPrice();
     }
 
-    @Override
-    public void addToOrder(Order order) {}
+    // @Override
+    // public void addToOrder(Order order) {}
 
-    @Override
-    public void displayOrderDetails() {}
+    // @Override
+    // public void displayOrderDetails() {}
 
     @Override
     public void reduceQuantity() {

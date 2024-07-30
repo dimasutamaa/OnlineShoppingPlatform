@@ -19,8 +19,6 @@ public class User {
 
     public void placeOrder(Order order){}
 
-    public void updateEmail(String newEmail){}
-
     public String getUserId() {
         return userId;
     }
